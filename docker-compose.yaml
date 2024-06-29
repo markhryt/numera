@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: numera
+      POSTGRES_USER: markhrytchak
+      POSTGRES_PASSWORD: asdf
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: ./numera_back
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgres://markhrytchak:asdf@postgres:5432/numera
+    depends_on:
+      - postgres
+
+  frontend:
+    build: ./numera/numera
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+volumes:
+  postgres-data:
