@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const convertapi = require('convertapi')('YpkfGwi7bO04Y83V'); // Replace with your ConvertAPI secret key
+const API_KEY = process.env.API_KEY;
+const convertapi = require('convertapi')(API_KEY);
 
 
 // Define route handler for file upload and conversion
